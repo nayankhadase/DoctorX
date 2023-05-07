@@ -11,6 +11,10 @@
 		107A83652A00058D0051B05D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107A83642A00058D0051B05D /* ContentView.swift */; };
 		107A83672A00058F0051B05D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 107A83662A00058F0051B05D /* Assets.xcassets */; };
 		107A836A2A00058F0051B05D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 107A83692A00058F0051B05D /* Preview Assets.xcassets */; };
+		107A83732A0008C50051B05D /* PlayfairDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 107A83712A0008C50051B05D /* PlayfairDisplay-Bold.ttf */; };
+		107A83742A0008C50051B05D /* PlayfairDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 107A83722A0008C50051B05D /* PlayfairDisplay-Regular.ttf */; };
+		108AF3D62A076FE7006DADCC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108AF3D52A076FE7006DADCC /* HomeView.swift */; };
+		108AF3D82A077B52006DADCC /* Extensons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108AF3D72A077B52006DADCC /* Extensons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +23,11 @@
 		107A83642A00058D0051B05D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		107A83662A00058F0051B05D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		107A83692A00058F0051B05D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		107A83712A0008C50051B05D /* PlayfairDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-Bold.ttf"; sourceTree = "<group>"; };
+		107A83722A0008C50051B05D /* PlayfairDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-Regular.ttf"; sourceTree = "<group>"; };
+		107A83752A0008E80051B05D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		108AF3D52A076FE7006DADCC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		108AF3D72A077B52006DADCC /* Extensons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensons.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +44,7 @@
 		107A83562A00058D0051B05D = {
 			isa = PBXGroup;
 			children = (
+				108AF3D72A077B52006DADCC /* Extensons.swift */,
 				107A83612A00058D0051B05D /* DoctorX */,
 				107A83602A00058D0051B05D /* Products */,
 			);
@@ -51,9 +61,12 @@
 		107A83612A00058D0051B05D /* DoctorX */ = {
 			isa = PBXGroup;
 			children = (
+				107A83752A0008E80051B05D /* Info.plist */,
 				107A83622A00058D0051B05D /* DoctorXApp.swift */,
 				107A83642A00058D0051B05D /* ContentView.swift */,
+				108AF3D52A076FE7006DADCC /* HomeView.swift */,
 				107A83662A00058F0051B05D /* Assets.xcassets */,
+				107A83702A0008830051B05D /* Fonts */,
 				107A83682A00058F0051B05D /* Preview Content */,
 			);
 			path = DoctorX;
@@ -65,6 +78,15 @@
 				107A83692A00058F0051B05D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		107A83702A0008830051B05D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				107A83712A0008C50051B05D /* PlayfairDisplay-Bold.ttf */,
+				107A83722A0008C50051B05D /* PlayfairDisplay-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +147,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				107A83742A0008C50051B05D /* PlayfairDisplay-Regular.ttf in Resources */,
+				107A83732A0008C50051B05D /* PlayfairDisplay-Bold.ttf in Resources */,
 				107A836A2A00058F0051B05D /* Preview Assets.xcassets in Resources */,
 				107A83672A00058F0051B05D /* Assets.xcassets in Resources */,
 			);
@@ -137,6 +161,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				108AF3D62A076FE7006DADCC /* HomeView.swift in Sources */,
+				108AF3D82A077B52006DADCC /* Extensons.swift in Sources */,
 				107A83652A00058D0051B05D /* ContentView.swift in Sources */,
 				107A83632A00058D0051B05D /* DoctorXApp.swift in Sources */,
 			);
@@ -270,6 +296,7 @@
 				DEVELOPMENT_TEAM = 5HQ3ZZS739;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DoctorX/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -299,6 +326,7 @@
 				DEVELOPMENT_TEAM = 5HQ3ZZS739;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DoctorX/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
