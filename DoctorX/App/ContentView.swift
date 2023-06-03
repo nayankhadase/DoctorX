@@ -16,7 +16,6 @@ struct ContentView: View {
         NavigationStack(path: $path){
             ZStack{
                 VStack{
-                    
                     TabView {
                         HomeView()
                             .tabItem {

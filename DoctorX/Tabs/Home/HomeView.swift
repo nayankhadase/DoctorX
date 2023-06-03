@@ -211,10 +211,10 @@ struct AppointmentCardView: View{
         }
         
         .padding()
-        .background(Color("Primary"))
+        .background(LinearGradient(colors: [Color("Primary").opacity(0.7),Color("Primary")], startPoint: .top, endPoint: .bottom))
         .clipShape(RoundedRectangle(cornerRadius: 10))
-        .shadow(color: Color.black.opacity(0.2), radius: 7, x: 3, y:3)
-        .shadow(color: Color.white.opacity(0.7), radius: 7, x: -3, y: -3)
+        .shadow(color: Color.black.opacity(0.2), radius: 2, x: 3, y:3)
+        .shadow(color: Color.white.opacity(0.3), radius: 2, x: -3, y: -3)
         .padding()
         
     }
@@ -285,71 +285,26 @@ struct CategoryCardView: View{
 }
 
 struct TopRatedDoctorView: View{
+    var categories: [String] = [
+        "General",
+        "Pediatrician",
+        "Cardiologist",
+        "Dermatologist",
+        "Neurologist",
+        "Psychiatrist",
+    ]
+    
     var body: some View{
         ScrollView(.vertical){
             VStack{
                 ForEach(0...5, id: \.self){ index in
-                    HStack(alignment: .top, spacing: 20){
-                        VStack{
-                            Spacer()
-                            Image("dr")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 50)
-                                .background(Color("Primary").opacity(0.5))
-                                .clipShape(Circle())
-                            Spacer()
-                        }
-                        
-                        
-                        VStack(alignment: .leading, spacing: 5){
-                            Spacer()
-                            Text("Dr. Name")
-                                .font(.body)
-                            
-                            HStack(alignment: .center, spacing: 15){
-                                Text("Dentist")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                                
-                                HStack{
-                                    Image(systemName: "star.fill")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 10)
-                                        .foregroundColor(.orange)
-                                    
-                                    Text("4.5")
-                                        .font(.subheadline)
-                                        .foregroundColor(.secondary)
-                                    
-                                }
-                            }
-                            Spacer()
-                        }
-                        
-                        Spacer()
-                        
-                        Button {
-                            //code
-                        } label: {
-                            Image(systemName: "heart")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20)
-                                .foregroundColor(.secondary)
-                        }
-                        .padding([ .top], 7)
-
-                        
-                        
-                        
+                    NavigationLink {
+                        DoctorInfoView()
+                    } label: {
+                        TopRatedDoctorCardView(drType: categories[Int.random(in: 0..<categories.count)])
                     }
-                    .padding(.horizontal)
-                    .padding(.vertical, 4)
-                    .background(Color("Secondary").opacity(0.5))
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .padding(.vertical, 4)
+
+                    
                 }
             }
             .padding()
@@ -360,5 +315,73 @@ struct TopRatedDoctorView: View{
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+    }
+}
+
+struct TopRatedDoctorCardView: View {
+    @State private var isFavorite = false
+    var drType: String
+    var body: some View {
+        HStack(alignment: .top, spacing: 20){
+            VStack{
+                Spacer()
+                Image("dr")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50)
+                    .background(Color("Primary").opacity(0.5))
+                    .clipShape(Circle())
+                Spacer()
+            }
+            
+            
+            VStack(alignment: .leading, spacing: 5){
+                Spacer()
+                Text("Dr. Name")
+                    .font(.body)
+                
+                HStack(alignment: .center, spacing: 15){
+                    Text(drType)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    
+                    HStack{
+                        Image(systemName: "star.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 10)
+                            .foregroundColor(.orange)
+                        
+                        Text("4.5")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        
+                    }
+                }
+                Spacer()
+            }
+            
+            Spacer()
+            
+            Button {
+                isFavorite.toggle()
+            } label: {
+                Image(systemName: isFavorite ? "heart.fill" : "heart")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 20)
+                    .foregroundColor(isFavorite ? .red : .secondary)
+            }
+            .padding([ .top], 7)
+            
+            
+            
+            
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 4)
+        .background(Color("Secondary").opacity(0.5))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .padding(.vertical, 4)
     }
 }
