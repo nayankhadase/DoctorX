@@ -16,47 +16,7 @@ struct ContentView: View {
         NavigationStack(path: $path){
             ZStack{
                 VStack{
-                    TabView {
-                        HomeView()
-                            .tabItem {
-                                Label {
-                                    Text("Home")
-                                } icon: {
-                                    Image(systemName: "house")
-                                }
-
-                            }
-                        
-                        HomeView()
-                            .tabItem {
-                                Label {
-                                    Text("Medicine")
-                                } icon: {
-                                    Image(systemName: "pills")
-                                }
-
-                            }
-                        
-                        HomeView()
-                            .tabItem {
-                                Label {
-                                    Text("Message")
-                                } icon: {
-                                    Image(systemName: "message")
-                                }
-
-                            }
-                        
-                        HomeView()
-                            .tabItem {
-                                Label {
-                                    Text("History")
-                                } icon: {
-                                    Image(systemName: "clock.arrow.circlepath")
-                                }
-
-                            }
-                    }
+                    MainTabBarView()
                 }
             }
         }

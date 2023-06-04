@@ -16,6 +16,8 @@
 		108AF3D62A076FE7006DADCC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108AF3D52A076FE7006DADCC /* HomeView.swift */; };
 		108AF3D82A077B52006DADCC /* Extensons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108AF3D72A077B52006DADCC /* Extensons.swift */; };
 		10B7BB1A2A2B0D8C00FDD047 /* DoctorInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B7BB192A2B0D8C00FDD047 /* DoctorInfoView.swift */; };
+		10C615F72A2BA3E40040EB53 /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C615F62A2BA3E40040EB53 /* MainTabBarView.swift */; };
+		10C615FA2A2BA4730040EB53 /* MedicineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C615F92A2BA4730040EB53 /* MedicineView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		108AF3D52A076FE7006DADCC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		108AF3D72A077B52006DADCC /* Extensons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensons.swift; sourceTree = "<group>"; };
 		10B7BB192A2B0D8C00FDD047 /* DoctorInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorInfoView.swift; sourceTree = "<group>"; };
+		10C615F62A2BA3E40040EB53 /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
+		10C615F92A2BA4730040EB53 /* MedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +97,9 @@
 		10B7BB152A2B0C9A00FDD047 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				10C615F62A2BA3E40040EB53 /* MainTabBarView.swift */,
 				10B7BB162A2B0CA200FDD047 /* Home */,
+				10C615F82A2BA4170040EB53 /* MedicineView */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -122,6 +128,14 @@
 				108AF3D72A077B52006DADCC /* Extensons.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		10C615F82A2BA4170040EB53 /* MedicineView */ = {
+			isa = PBXGroup;
+			children = (
+				10C615F92A2BA4730040EB53 /* MedicineView.swift */,
+			);
+			path = MedicineView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,8 +211,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				108AF3D62A076FE7006DADCC /* HomeView.swift in Sources */,
+				10C615F72A2BA3E40040EB53 /* MainTabBarView.swift in Sources */,
 				108AF3D82A077B52006DADCC /* Extensons.swift in Sources */,
 				10B7BB1A2A2B0D8C00FDD047 /* DoctorInfoView.swift in Sources */,
+				10C615FA2A2BA4730040EB53 /* MedicineView.swift in Sources */,
 				107A83652A00058D0051B05D /* ContentView.swift in Sources */,
 				107A83632A00058D0051B05D /* DoctorXApp.swift in Sources */,
 			);

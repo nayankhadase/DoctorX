@@ -234,7 +234,7 @@ struct AllCategoryView: View{
     
     var body: some View{
         ScrollView(.horizontal, showsIndicators: false){
-            HStack(alignment: .center){
+            HStack(alignment: .center, spacing: 0){
                 ForEach(categories, id: \.self) { category in
                     CategoryCardView(isActive: category == categories[categoryIndex], drType: category){
                         //code
