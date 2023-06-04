@@ -166,7 +166,7 @@ struct TabletsCardView: View{
     let geo: GeometryProxy
     var body: some View{
         VStack{
-            Image("tablet")
+            Image("tablet\(Int.random(in: 1...3))")
                 .resizable()
                 .scaledToFit()
                 .frame(width: geo.size.width * 0.15)

@@ -30,7 +30,7 @@ struct MainTabBarView: View {
 
                 }
             
-            HomeView()
+            ChatWithDrTabView()
                 .tabItem {
                     Label {
                         Text("Message")
@@ -40,7 +40,7 @@ struct MainTabBarView: View {
 
                 }
             
-            HomeView()
+            HistoryTabView()
                 .tabItem {
                     Label {
                         Text("History")

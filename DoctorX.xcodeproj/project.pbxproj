@@ -18,6 +18,8 @@
 		10B7BB1A2A2B0D8C00FDD047 /* DoctorInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B7BB192A2B0D8C00FDD047 /* DoctorInfoView.swift */; };
 		10C615F72A2BA3E40040EB53 /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C615F62A2BA3E40040EB53 /* MainTabBarView.swift */; };
 		10C615FA2A2BA4730040EB53 /* MedicineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C615F92A2BA4730040EB53 /* MedicineView.swift */; };
+		10C6162F2A2D043D0040EB53 /* HistoryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C6162E2A2D043D0040EB53 /* HistoryTabView.swift */; };
+		10C616322A2D0D4E0040EB53 /* ChatWithDrTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C616312A2D0D4E0040EB53 /* ChatWithDrTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		10B7BB192A2B0D8C00FDD047 /* DoctorInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorInfoView.swift; sourceTree = "<group>"; };
 		10C615F62A2BA3E40040EB53 /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
 		10C615F92A2BA4730040EB53 /* MedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineView.swift; sourceTree = "<group>"; };
+		10C6162E2A2D043D0040EB53 /* HistoryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTabView.swift; sourceTree = "<group>"; };
+		10C616312A2D0D4E0040EB53 /* ChatWithDrTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWithDrTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 				10C615F62A2BA3E40040EB53 /* MainTabBarView.swift */,
 				10B7BB162A2B0CA200FDD047 /* Home */,
 				10C615F82A2BA4170040EB53 /* MedicineView */,
+				10C6162D2A2D04280040EB53 /* History */,
+				10C616302A2D0D2C0040EB53 /* Chatting */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -136,6 +142,22 @@
 				10C615F92A2BA4730040EB53 /* MedicineView.swift */,
 			);
 			path = MedicineView;
+			sourceTree = "<group>";
+		};
+		10C6162D2A2D04280040EB53 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				10C6162E2A2D043D0040EB53 /* HistoryTabView.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		10C616302A2D0D2C0040EB53 /* Chatting */ = {
+			isa = PBXGroup;
+			children = (
+				10C616312A2D0D4E0040EB53 /* ChatWithDrTabView.swift */,
+			);
+			path = Chatting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,8 +235,10 @@
 				108AF3D62A076FE7006DADCC /* HomeView.swift in Sources */,
 				10C615F72A2BA3E40040EB53 /* MainTabBarView.swift in Sources */,
 				108AF3D82A077B52006DADCC /* Extensons.swift in Sources */,
+				10C6162F2A2D043D0040EB53 /* HistoryTabView.swift in Sources */,
 				10B7BB1A2A2B0D8C00FDD047 /* DoctorInfoView.swift in Sources */,
 				10C615FA2A2BA4730040EB53 /* MedicineView.swift in Sources */,
+				10C616322A2D0D4E0040EB53 /* ChatWithDrTabView.swift in Sources */,
 				107A83652A00058D0051B05D /* ContentView.swift in Sources */,
 				107A83632A00058D0051B05D /* DoctorXApp.swift in Sources */,
 			);
