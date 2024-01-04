@@ -7,87 +7,126 @@
 
 import SwiftUI
 
-struct DrCategory: Hashable{
-    let type: String
-    let imgname: String
-}
-
 struct HomeView: View {
+    
     @State private var searchText = ""
     @State private var categoryIndex: Int = 0
     
+    @Environment(MainTabbarViewModel.self) var mainTabbarVM
+    @Environment(HomeViewModel.self) var homeVM
+    @Environment(ProgressbarViewModel.self) var progressbarViewModel
+    
+    
     var body: some View {
         ZStack{
-            VStack(alignment: .leading, spacing: 30){
-                TopBarView(searchText: $searchText)
-                    .padding(.horizontal)
-                    .background()
-                //.shadow(color: Color.black.opacity(0.2), radius: 5, x: 3, y: 3)
-                
-                ScrollView(.vertical){
-                    VStack{
-                        VStack(alignment: .leading, spacing: 0){
-                            HStack{
-                                Text("Upcomming Appointments")
+            GeometryReader{ geo in
+                VStack(alignment: .leading){
+                    TopBarView(searchText: $searchText)
+                        .padding(.horizontal)
+                        .background()
+                        .shadow(color: Color.gray.opacity(0.2), radius: 3, x: 1.5, y: 1.5)
+                    
+                    
+                    ScrollView(.vertical){
+                        VStack(alignment: .leading){
+                            if (User.shared.name != nil){
+                                VStack(alignment: .leading){
+                                    Text("Hey!")
+                                    Text(User.shared.name?.split(separator: " ").first ?? "")
+                                        .font(.system(size: 25, design: .serif).bold())
+                                }
+                                .padding(.horizontal)
+                                .padding(.bottom, 8)
+                            }
+                            
+                            VStack(alignment: .leading, spacing: 0){
+                                HStack{
+                                    Text("Upcomming Appointments")
+                                        .font(.system(.subheadline))
+                                        .foregroundColor(.black.opacity(0.6))
+                                    
+                                    Spacer()
+                                    if !homeVM.upcommingAppointments.isEmpty{
+                                        Button {
+                                            //code
+                                        } label: {
+                                            Text("View all")
+                                                .font(.caption)
+                                        }
+                                    }
+                                }
+                                .padding(.horizontal)
+                                
+                                if !homeVM.upcommingAppointments.isEmpty{
+                                    UpcommingAppointmentView()
+                                }else{
+                                    EmptyAppointmentView(message: "No upcomming appointment available")
+                                }
+                            }
+                            
+                            // category
+                            VStack(alignment: .leading, spacing: 0){
+                                Text("Categories")
                                     .font(.system(.subheadline))
                                     .foregroundColor(.black.opacity(0.6))
+                                    .padding(.horizontal)
                                 
-                                Spacer()
-                                Button {
-                                    //code
-                                } label: {
-                                    Text("View all")
-                                        .font(.caption)
-                                }
-
+                                AllCategoryView(categoryIndex: $categoryIndex)
                             }
-                            .padding(.horizontal)
-                            UpcommingAppointmentView()
-                        }
-                        
-                        // category
-                        VStack(alignment: .leading, spacing: 0){
-                            Text("Categories")
-                                .font(.system(.subheadline))
-                                .foregroundColor(.black.opacity(0.6))
-                                .padding(.horizontal)
                             
-                            AllCategoryView(categoryIndex: $categoryIndex)
-                        }
-                        
-                        // top doctors
-                        VStack(alignment: .leading, spacing: 0){
-                            Text("Top Rated Doctors")
-                                .font(.system(.subheadline))
-                                .foregroundColor(.black.opacity(0.6))
-                                .padding(.horizontal)
-                            TopRatedDoctorView()
+                            // top doctors
+                            VStack(alignment: .leading, spacing: 0){
+                                Text("Top Rated Doctors")
+                                    .font(.system(.subheadline))
+                                    .foregroundColor(.black.opacity(0.6))
+                                    .padding(.horizontal)
+                                if !homeVM.doctors.isEmpty{
+                                    TopRatedDoctorView()
+                                }else{
+                                    Text("No doctors available")
+                                        .frame(maxWidth: .infinity)
+                                        .padding()
+                                        .background(Color("Secondary").opacity(0.5))
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                        .padding()
+                                }
+                            }
                         }
                     }
+                    .redacted(reason: homeVM.isLoading ? .placeholder : .init())
+                    Spacer()
                 }
-                
-                
-                
-                
-                
-                Spacer()
             }
         }
+        .modifier(ProgressbarView(progressbarView: progressbarViewModel))
     }
 }
 
 struct TopBarView: View{
     @Binding var searchText: String
+    @Environment(MainTabbarViewModel.self) private var mainTabBarVM
+    
     var body: some View{
         HStack(spacing: 20){
+            
             Button {
-                //code
+                if mainTabBarVM.showHamburger{
+                    // open sidebar
+                    withAnimation {
+                        mainTabBarVM.isSideMenuOpen = true
+                    }
+                    
+                }else{
+                    // open notification
+                }
             } label: {
-                Image(systemName: "bell")
+                Image(systemName: mainTabBarVM.showHamburger ? "list.bullet" : "bell")
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 20)
+                    .frame(height: 15)
             }
+            
+            
             HStack(spacing: 0){
                 Image(systemName: "magnifyingglass")
                     .resizable()
@@ -99,8 +138,8 @@ struct TopBarView: View{
                 TextField("Search..", text: $searchText)
                     .padding(.horizontal)
                     .padding(.vertical, 8)
-                    
-                    
+                
+                
             }
             .background(.gray.opacity(0.05))
             .clipShape(Capsule())
@@ -126,19 +165,59 @@ struct TopBarView: View{
     }
 }
 
+struct EmptyAppointmentView: View {
+    let message: String
+    var body: some View {
+        VStack(spacing: 10){
+            HStack{
+                VStack{
+                    Text("Oops!\n\(message)")
+                        .foregroundStyle(Color.white.opacity(0.5))
+                }
+                Spacer()
+                Image("checkup")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height:150)
+            }
+            
+        }
+        .frame(height: 100)
+        .frame(maxWidth: .infinity)
+        .padding()
+        .background(LinearGradient(colors: [Color("Primary").opacity(0.7),Color("Primary")], startPoint: .top, endPoint: .bottom))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .shadow(color: Color.black.opacity(0.2), radius: 2, x: 3, y:3)
+        .shadow(color: Color.white.opacity(0.3), radius: 2, x: -3, y: -3)
+        .padding()
+    }
+}
+
 struct UpcommingAppointmentView: View{
+    @Environment(HomeViewModel.self) private var homeViewModel
+    
     var body: some View{
+        
         ScrollView(.horizontal, showsIndicators: false){
             HStack{
-                ForEach(0...4, id: \.self) { index in
-                    AppointmentCardView()
+                ForEach(homeViewModel.upcommingAppointments, id: \.id) { appointment in
+                    NavigationLink {
+                        AppointmentDetailsView(appt: appointment)
+                    } label: {
+                        AppointmentCardView(appointment: appointment)
+                    }
+
+                    
+                        
                 }
             }
         }
+        
     }
 }
 
 struct AppointmentCardView: View{
+    let appointment: Appointment
     
     var body: some View{
         VStack{
@@ -151,11 +230,11 @@ struct AppointmentCardView: View{
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 
                 VStack(alignment: .leading){
-                    Text("Dr. Name")
+                    Text(appointment.doctor.name)
                         .font(.body)
                         .foregroundColor(.white)
                     
-                    Text("Dentist")
+                    Text(appointment.doctor.type.capitalized)
                         .font(.caption2)
                         .foregroundColor(.white)
                 }
@@ -177,13 +256,13 @@ struct AppointmentCardView: View{
                 .clipShape(Circle())
                 .shadow(color: Color.black.opacity(0.2), radius: 5, x: 2, y:2)
                 .shadow(color: Color.white.opacity(0.7), radius: 2, x: -1, y: -1)
-
+                .padding(.leading)
                 
             }
             
             HStack{
                 Label {
-                    Text("22-05-2023")
+                    Text(appointment.aptDate)
                         .font(.caption)
                 } icon: {
                     Image(systemName: "calendar")
@@ -193,54 +272,43 @@ struct AppointmentCardView: View{
                 Spacer()
                 
                 Label {
-                    Text("11.00 Am - 12.00 Pm")
+                    Text(appointment.aptTime)
                         .font(.caption)
                 } icon: {
                     Image(systemName: "clock")
                 }
                 .foregroundColor(.secondary)
-                
-
             }
             .padding(5)
             .padding(.horizontal)
             .background()
             .clipShape(RoundedRectangle(cornerRadius: 5))
-            
-            
         }
-        
         .padding()
+        .frame(width: UIScreen.main.bounds.size.width * 0.85)
         .background(LinearGradient(colors: [Color("Primary").opacity(0.7),Color("Primary")], startPoint: .top, endPoint: .bottom))
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .shadow(color: Color.black.opacity(0.2), radius: 2, x: 3, y:3)
         .shadow(color: Color.white.opacity(0.3), radius: 2, x: -3, y: -3)
-        .padding()
+        .padding(10)
         
     }
 }
 
 struct AllCategoryView: View{
+    @Environment(HomeViewModel.self) var homeVM
     @Binding var categoryIndex: Int
-    @State private var categories: [DrCategory] = [
-        .init(type: "General", imgname: ""),
-        .init(type: "Pediatrician", imgname: ""),
-        .init(type: "Cardiologist", imgname: ""),
-        .init(type: "Dermatologist", imgname: ""),
-        .init(type: "Neurologist", imgname: ""),
-        .init(type: "Psychiatrist", imgname: ""),
-    ]
-    
     
     var body: some View{
         ScrollView(.horizontal, showsIndicators: false){
             HStack(alignment: .center, spacing: 0){
-                ForEach(categories, id: \.self) { category in
-                    CategoryCardView(isActive: category == categories[categoryIndex], drType: category){
+                ForEach(homeVM.doctorCategory, id: \.self) { category in
+                    CategoryCardView(isActive: category == homeVM.doctorCategory[categoryIndex], drType: category){
                         //code
                         withAnimation {
-                            categoryIndex = categories.firstIndex(of: category) ?? 0
+                            categoryIndex = homeVM.doctorCategory.firstIndex(of: category) ?? 0
                         }
+                        homeVM.getFilterDoctors(type: category.type)
                         
                     }
                 }
@@ -272,55 +340,47 @@ struct CategoryCardView: View{
                     .shadow(color: Color.black.opacity(0.2), radius: 4, x: 2, y: 2)
                     .shadow(color: Color.white.opacity(0.7), radius: 5, x: -3, y: -3)
                 
-                Text(drType.type)
+                Text(drType.type.capitalized)
                     .font(.caption)
             }
             
         }
         .padding()
-
         
-
+        
+        
     }
 }
 
 struct TopRatedDoctorView: View{
-    var categories: [String] = [
-        "General",
-        "Pediatrician",
-        "Cardiologist",
-        "Dermatologist",
-        "Neurologist",
-        "Psychiatrist",
-    ]
+    @Environment(HomeViewModel.self) var homeVM
     
     var body: some View{
+        
         ScrollView(.vertical){
             VStack{
-                ForEach(0...5, id: \.self){ index in
+                ForEach(homeVM.doctors, id: \.self){ doctor in
                     NavigationLink {
-                        DoctorInfoView()
+                        DoctorInfoView(homeVM: homeVM, doctor: doctor)
                     } label: {
-                        TopRatedDoctorCardView(drType: categories[Int.random(in: 0..<categories.count)])
+                        TopRatedDoctorCardView(doctor: doctor)
                     }
-
+                    
                     
                 }
             }
             .padding()
         }
-    }
-}
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
+        
+        
     }
 }
 
 struct TopRatedDoctorCardView: View {
     @State private var isFavorite = false
-    var drType: String
+    //    var drType: String
+    let doctor: Doctor
+    
     var body: some View {
         HStack(alignment: .top, spacing: 20){
             VStack{
@@ -337,11 +397,11 @@ struct TopRatedDoctorCardView: View {
             
             VStack(alignment: .leading, spacing: 5){
                 Spacer()
-                Text("Dr. Name")
+                Text(doctor.name.capitalized)
                     .font(.body)
                 
                 HStack(alignment: .center, spacing: 15){
-                    Text(drType)
+                    Text(doctor.type.capitalized)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                     
@@ -383,5 +443,17 @@ struct TopRatedDoctorCardView: View {
         .background(Color("Secondary").opacity(0.5))
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .padding(.vertical, 4)
+    }
+}
+
+
+
+
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView()
+            .environment(MainTabbarViewModel())
+            .environment(HomeViewModel())
+            .environment(ProgressbarViewModel())
     }
 }

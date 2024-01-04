@@ -1,0 +1,319 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@ | " : {
+
+    },
+    "%@ via/to %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ via/to %2$@"
+          }
+        }
+      }
+    },
+    "%lld" : {
+
+    },
+    "%lld Reviews" : {
+
+    },
+    "4.5" : {
+
+    },
+    "About" : {
+
+    },
+    "Add" : {
+
+    },
+    "Add mode items" : {
+
+    },
+    "Add new address" : {
+
+    },
+    "Address" : {
+
+    },
+    "Already has account? SignIn" : {
+
+    },
+    "Appointment details" : {
+
+    },
+    "Appointment history" : {
+
+    },
+    "Appointments" : {
+
+    },
+    "Book again" : {
+
+    },
+    "Book an apponintment" : {
+
+    },
+    "Book Appointment" : {
+
+    },
+    "Book now" : {
+
+    },
+    "book your seat" : {
+
+    },
+    "Booking" : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Categories" : {
+
+    },
+    "Charges: ₹%@" : {
+
+    },
+    "Check network connection." : {
+      "comment" : "check_network_connection"
+    },
+    "Confirm" : {
+
+    },
+    "Connect with Doctors" : {
+
+    },
+    "Consultation type" : {
+
+    },
+    "Date:" : {
+
+    },
+    "Dr. Name" : {
+
+    },
+    "Email" : {
+
+    },
+    "Email already exists." : {
+      "comment" : "email_already_exists"
+    },
+    "Enter email" : {
+
+    },
+    "Enter Name" : {
+
+    },
+    "Enter Password" : {
+
+    },
+    "Enter valid email ID." : {
+
+    },
+    "For doctor login / registration?" : {
+
+    },
+    "forget password" : {
+
+    },
+    "Free body cheakup" : {
+
+    },
+    "GET 50% OFF" : {
+
+    },
+    "Get FREE delivery" : {
+
+    },
+    "Hello Again!" : {
+
+    },
+    "Hello there!" : {
+
+    },
+    "Hey!" : {
+
+    },
+    "Hide History" : {
+
+    },
+    "History" : {
+
+    },
+    "Home" : {
+
+    },
+    "If you are a doctor" : {
+
+    },
+    "Invalid login credentials." : {
+      "comment" : "user_not_found"
+    },
+    "Items added: 4" : {
+
+    },
+    "Let's create your profile" : {
+
+    },
+    "Let's go" : {
+
+    },
+    "limited seats" : {
+
+    },
+    "Logout" : {
+
+    },
+    "Medicine" : {
+
+    },
+    "Menu" : {
+
+    },
+    "Message" : {
+
+    },
+    "Modify" : {
+
+    },
+    "My addresses" : {
+
+    },
+    "nayan@gmail.com" : {
+
+    },
+    "No doctors available" : {
+
+    },
+    "Not a member?" : {
+
+    },
+    "Office" : {
+
+    },
+    "Ok" : {
+
+    },
+    "on all items" : {
+
+    },
+    "on your first order" : {
+
+    },
+    "Oops!\n%@" : {
+
+    },
+    "Or continue with" : {
+
+    },
+    "Order now" : {
+
+    },
+    "Password must be atleast 6 charactor." : {
+
+    },
+    "Patients attended: 400+" : {
+
+    },
+    "Phone number" : {
+
+    },
+    "Please wait! Loading..." : {
+
+    },
+    "Pune" : {
+
+    },
+    "Register" : {
+
+    },
+    "Register now" : {
+
+    },
+    "Save" : {
+
+    },
+    "Schedule again" : {
+
+    },
+    "Search.." : {
+
+    },
+    "Select date" : {
+
+    },
+    "Select gender" : {
+
+    },
+    "Select Image" : {
+
+    },
+    "Select Time" : {
+
+    },
+    "Selected type" : {
+
+    },
+    "server_error" : {
+      "comment" : "Server error."
+    },
+    "Show History" : {
+
+    },
+    "Sign In" : {
+
+    },
+    "Sumasoft pvt. ltd, Aundh, Pune 43007" : {
+
+    },
+    "Sumasoft pvt. ltd., Aundh, Pune 43007" : {
+
+    },
+    "Time:" : {
+
+    },
+    "Top Rated Doctors" : {
+
+    },
+    "Type:" : {
+
+    },
+    "Upcomming appointments" : {
+
+    },
+    "Upcomming Appointments" : {
+
+    },
+    "view" : {
+
+    },
+    "View all" : {
+
+    },
+    "View Cart" : {
+
+    },
+    "Visited" : {
+
+    },
+    "welcome back we've\n been missed!" : {
+
+    },
+    "Welcome!" : {
+
+    },
+    "What we call you?" : {
+
+    },
+    "Your appointment has been booked!" : {
+
+    },
+    "Your saved addresses" : {
+
+    }
+  },
+  "version" : "1.0"
+}

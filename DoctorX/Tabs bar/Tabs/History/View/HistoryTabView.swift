@@ -9,6 +9,9 @@ import SwiftUI
 
 struct HistoryTabView: View {
     @State private var searchText = ""
+    @State private var historyViewModel = HistoryViewModel()
+    @Environment(ProgressbarViewModel.self) var progressbarViewModel
+    @Environment(HomeViewModel.self) var homeVM
     
     var body: some View {
         GeometryReader { geo in
@@ -19,21 +22,23 @@ struct HistoryTabView: View {
                         .background()
                     ScrollView{
                         VStack(alignment: .leading, spacing: 0){
-                            
-                            
+                        
                             DrCampCardView(geo: geo)
                             
                             Text("Appointment history")
                                 .font(.body.bold())
                                 .padding(.horizontal)
-                            
-                            ScrollView{
-                                VStack{
-                                    ForEach(0...4, id: \.self) { _ in
-                                        DrHistoryCardView(geo: geo)
+                            if historyViewModel.historyAppointments.isEmpty{
+                                EmptyAppointmentView(message: "You don't have appointment history")
+                            }else{
+                                ScrollView{
+                                    VStack{
+                                        ForEach(historyViewModel.historyAppointments, id: \.self) { appointment in
+                                            DrHistoryCardView(geo: geo, appointment: appointment, homeVM: homeVM)
+                                        }
                                     }
+                                    .padding()
                                 }
-                                .padding()
                             }
                         }
                     }
@@ -42,25 +47,39 @@ struct HistoryTabView: View {
             }
             .frame(height: geo.size.height)
         }
+        .modifier(ProgressbarView(progressbarView: progressbarViewModel))
+        .onAppear(perform: {
+            historyViewModel.progressBar = progressbarViewModel
+            historyViewModel.fetchAllApponitments()
+        })
     }
 }
 
 struct HistoryTabView_Previews: PreviewProvider {
     static var previews: some View {
         HistoryTabView()
+            .environment(HistoryViewModel())
+            .environment(ProgressbarViewModel())
+            .environment(HomeViewModel())
+            .environment(MainTabbarViewModel())
+           
     }
 }
 
 struct DrHistoryCardView: View {
     let geo: GeometryProxy
+    let appointment: Appointment
+    @Bindable var homeVM: HomeViewModel
+    
     var body: some View {
         VStack{
             HStack{
                 VStack(alignment: .leading, spacing: 5){
-                    Text("Dr name_abc")
+                    Text(appointment.doctor.name)
                         
-                    Text("Dr type")
+                    Text(appointment.doctor.type)
                         .font(.caption)
+                    
                     HStack(spacing: 0){
                         ForEach(1...5, id:\.self){ i in
                             Image(systemName: "star.fill")
@@ -68,7 +87,7 @@ struct DrHistoryCardView: View {
                                 .foregroundColor(.orange)
                             
                         }
-                        Text("200 Reviews")
+                        Text("\(Int.random(in: 30..<200)) Reviews")
                             .font(.caption)
                             .padding(.leading, 4)
                     }
@@ -83,60 +102,58 @@ struct DrHistoryCardView: View {
             }
             HStack{
                 Label {
-                    Text("22-05-2023")
+                    Text(appointment.aptDate)
                         .font(.caption)
                 } icon: {
                     Image(systemName: "calendar")
                 }
                 .foregroundColor(.secondary)
                 
-            
-                
                 Label {
-                    Text("11.00 Am - 12.00 Pm")
+                    Text(appointment.aptTime)
                         .font(.caption)
                 } icon: {
                     Image(systemName: "clock")
                 }
                 .foregroundColor(.secondary)
+                Spacer()
                 
-                Label {
-                    Text("Visited")
-                        .font(.caption)
-                } icon: {
-                    Image(systemName: "circle.fill")
-                        .imageScale(.small)
-                        .foregroundColor(Color("Primary"))
+                if !appointment.isUpcomming{
+                    Label {
+                        Text("Visited")
+                            .font(.caption)
+                    } icon: {
+                        Image(systemName: "circle.fill")
+                            .imageScale(.small)
+                            .foregroundColor(appointment.visited ? Color("Primary") : Color.red)
+                    }
+                    .foregroundColor(.secondary)
                 }
-                .foregroundColor(.secondary)
-
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical)
             .background()
             .clipShape(RoundedRectangle(cornerRadius: 5))
             
-            NavigationLink {
-                DoctorInfoView()
-            } label: {
-                Text("Schedule again")
-                    .foregroundColor(.white)
-                    .padding(.vertical, 10)
-                    .frame(maxWidth: .infinity)
-                    .background(Color("Primary"))
+            if !appointment.isUpcomming{
+                NavigationLink {
+                    DoctorInfoView(homeVM: homeVM, doctor: appointment.doctor)
+                } label: {
+                    Text("Schedule again")
+                        .foregroundColor(.white)
+                        .padding(.vertical, 10)
+                        .frame(maxWidth: .infinity)
+                        .background(Color("Primary"))
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .padding(.horizontal)
             }
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-            .padding(.horizontal)
-           
-
-            
-            
         }
         .padding()
         .background(.white)
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .shadow(color: .gray.opacity(0.3),radius: 5, x:3,y:3)
-        .padding(.bottom)
+//        .padding(.bottom)
         
     }
 }
